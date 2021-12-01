@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+struct AppState {
+    var history: HistoryState
+}
+

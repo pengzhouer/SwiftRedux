@@ -6,3 +6,10 @@
 //
 
 import Foundation
+import Redux
+
+func rootReducer(state: AppState? = nil, action: Action) -> AppState {
+    return AppState(
+        history: historyReducer(state?.history, action)
+    )
+}
