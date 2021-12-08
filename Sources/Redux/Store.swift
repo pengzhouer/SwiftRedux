@@ -40,6 +40,6 @@ public final class Store<State, Action>: ObservableObject {
 }
 
 @available(iOS 13.0, *)
-public func createStore<State, Action>(initialState: State, reducer: @escaping Reducer<State, Action>, enhancer: Enhancer<State, Action>? = nil) -> Store<State, Action> {
+public func createStore<State>(initialState: State, reducer: @escaping Reducer<State, Action>, enhancer: Enhancer<State, Action>? = nil) -> Store<State, Action> {
     Store(initialState: initialState, reducer: reducer, enhancer: enhancer)
 }
