@@ -8,9 +8,9 @@
 import Foundation
 
 public protocol Persistent {
-    associatedtype PersistState: Codable
-    func persist() -> PersistState
-    init(_: PersistState?)
+    associatedtype PersistedState: Codable
+    func persist() -> PersistedState
+    init(persistedState: PersistedState)
 }
 
 extension UserDefaults {
@@ -24,12 +24,12 @@ public func persistReducer<State: Persistent, Action>(reducer: @escaping (State?
         let key = String(describing: State.self)
         var inputState: State? = nil
         if state == nil {
-            let PersistState = type(of: State.self.init(nil).persist())
+            let PersistedState = State.PersistedState.self
             if let json = UserDefaults.redux?.object(forKey: key) as? Data {
-                if let persistState = try? JSONDecoder().decode(PersistState.self, from: json) {
-                    inputState = State.self.init(persistState)
+                if let persistedState = try? JSONDecoder().decode(PersistedState.self, from: json) {
+                    inputState = State.self.init(persistedState: persistedState)
                 } else {
-                    print("\(key) json decode fail")
+                    print("\(key) json decode fail, this reason because you changed the persisted structure")
                 }
             } else {
                 print("Don't find \(key) from UserDefaults.redux, if this is the first time open the app, it's common.")
