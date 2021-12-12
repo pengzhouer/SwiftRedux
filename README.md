@@ -193,3 +193,4 @@ func rootReducer(state: AppState? = nil, action: Action = InitialAction()) -> Ap
 We write one example project [Game-2048](https://github.com/13773753970/Game-2048) use this package to manage app state.
 
 ## License
+SwiftRedux Package is released under the [MIT License](https://github.com/13773753970/SwiftRedux/blob/main/LICENSE).
